@@ -1,42 +1,36 @@
 <template>
-  <div class="hello">
-    <h1>登录页面</h1>
-    <div>
-      <input type="text" v-model="username" placeholder="用户名">
-      <input type="text" v-model="password" placeholder="密码">
-      <a @click="doLogin">提交</a>
-    </div>
+  <div class="Login">
+   <h2>登录</h2>
+    <p>用户名:<input type="text" v-model="username"></p>
+    <p>密&nbsp;&nbsp;&nbsp;码:<input type="password" v-model="password"></p>
+    <button @click="islogin">登录</button>
   </div>
 </template>
 
 <script>
-
 export default {
-
-  name: 'HelloWorld',
+  name: 'Login',
   data () {
     return {
-      username: '',
-      password: ''
+      msg: 'Welcome to Your Vue.js App',
+      username:"",
+      password:""
     }
   },
   methods:{
-    doLogin() {
-      var that = this
+    islogin(){
+      var that=this
       this.$axios.request({
-        url: 'http://127.0.0.1:8000/login/',
-        method: 'POST',
-        data: {
-          username: this.username,
-          password: this.password
+        url:'http://127.0.0.1:8000/login/',
+        method:'POST',
+        data:{
+          username:this.username,
+          password:this.password
         },
-        responseType: 'json'
+        responseType:'json'
       }).then(function (response) {
-        console.log(response.data)
-        // 找到全局变量，把用户名和token赋值到其中。
-        that.$store.commit('saveToken',response.data)
-        // 重定向到index
-        that.$router.push('/index')
+        console.log(response)
+        // that.$route.push('/')
       })
     }
   }

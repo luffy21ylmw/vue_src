@@ -1,17 +1,16 @@
 <template>
-  <div class="hello">
-    <h1>深科技</h1>
-  </div>
+ <h2>新闻</h2>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Login',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+
     }
-  }
+  },
+
 }
 </script>
 
