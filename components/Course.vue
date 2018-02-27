@@ -53,14 +53,16 @@
   <hr width="60px" style="color: greenyellow;font-weight: 700">
 </div>
 
-<div>
-  <p v-for=""></p>
+<div class="row" >
+<div class="col-md-4"  v-for="course in courses" v-on:click="course_detil(course.id)">
+  <img :src="course.course_img" alt="">
+  <h4 class="text-center">{{course.name}}</h4>
+  <sapn class="text-center">{{course.brief}}</sapn>
+  <p class="text-center">难度:{{course.level}}</p>
+
 </div>
 </div>
-
-
-
-
+</div>
 
 </template>
 
@@ -69,10 +71,28 @@ export default {
   name: 'Login',
   data () {
     return {
-
+        courses:[],
+        course_id:''
     }
   },
-
+mounted:function () {
+  this.initCourse()
+},
+  methods:{
+    initCourse:function () {
+      var that=this
+      this.$axios.request({
+        url:'http://127.0.0.1:8000/courses/',
+        method:'GET'
+      }).then(function (response) {
+        that.courses=response.data.courseList
+      })
+    },
+    course_detil:function (id) {
+      console.log(id)
+      this.$router.push('course-detail/'+id)
+    }
+  }
 }
 </script>
 

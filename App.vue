@@ -24,7 +24,7 @@ export default {
 
 <style>
 body{margin: 0}
-.header {height: 60px;width: 80%;text-align: center;position: relative}
+.header {height: 60px;width: 80%;text-align: center;position: relative;background-color: white}
 .item{padding-left: 60px;line-height: 60px;}
 .header a{text-decoration: none;color: darkgrey}
 

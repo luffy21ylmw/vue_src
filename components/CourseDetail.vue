@@ -1,39 +1,40 @@
 <template>
-  <div>
-      <div>课程详细</div>
-      <h1>{{title}}</h1>
-      <h1>{{summary}}</h1>
+<div>
+  <h4 class="text-center">专题课程</h4>
 
-  </div>
+
+
+
+</div>
 </template>
 
 <script>
 export default {
+  name: 'Login',
   data () {
     return {
-      title:'',
-      summary:'',
+
     }
   },
   mounted:function () {
     this.initCourseDetail()
   },
   methods:{
-    initCourseDetail (){
-      var nid = this.$route.params.id
-      var that = this
-      var url = 'http://127.0.0.1:8000/courses/' + nid + '.json'
+    initCourseDetail:function () {
+      var that=this
+      var course_id=this.$route.params.id
       this.$axios.request({
-        url: url,
-        method: 'GET',
-        responseType: 'json'
+        url:"http://127.0.0.1:8000/courses/"+course_id+'.json',
+        method:"GET",
+        responseType:"json"
       }).then(function (response) {
+
         console.log(response)
-        that.title = response.data.title
-        that.summary = response.data.summary
+
       })
     }
   }
+
 }
 </script>
 
