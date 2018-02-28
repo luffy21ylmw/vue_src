@@ -55,7 +55,7 @@
           method: 'GET'
         }).then(function (response) {
           window.console.log(response.data);
-          that.newsList = response.data
+          that.newsList = response.data.ser
         })
       }
     }
