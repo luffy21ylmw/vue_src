@@ -25,7 +25,15 @@
       <div v-else>
         <ul v-for="comment in comment_data">
           <li>{{comment.content}}
-            <button v-on:click="child_comment(comment.id)">评论</button>
+            <div v-if="comment.id === mytoggle">
+              <input v-model="comment_par">
+              <button v-on:click="child_comment(comment.id)">发送</button>
+            </div>
+            <div v-else>
+              <button v-on:click="toggle_button(comment.id)">回复</button>
+            </div>
+
+
           </li>
         </ul>
       </div>
@@ -52,16 +60,21 @@
         agree_num: '',
         collect_num: '',
         comment: '',
-        comment_data: ''
+        comment_data: '',
+        comment_par:'',
+        mytoggle:'1',
       }
     },
     mounted: function () {
       this.initCourseDetail()
     },
     methods: {
+      toggle_button (comment_id){
+        this.mytoggle=comment_id
+      },
       initCourseDetail() {
         var nid = this.$route.params.id;
-        var that = this
+        var that = this;
         var url = 'http://127.0.0.1:8000/news/' + nid + '.json';
         this.$axios.request({
           url: url,
@@ -102,7 +115,8 @@
 
       },
       child_comment(id) {
-        //console.log(id);
+        this.mytoggle = '1';
+        console.log(id);
         var that = this;
         var url = 'http://127.0.0.1:8000/comment/';
         //console.log(that.$store.state.token);
@@ -112,7 +126,8 @@
           data: {
             comment: that.comment,
             id: that.data.id,
-            child_id: '',
+            parent_id:id,
+//            child_id: '',
             token: that.$store.state.token
           },
           responseType: 'json'
