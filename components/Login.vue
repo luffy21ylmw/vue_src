@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="Login">
    <h2>登录</h2>
     <p>用户名:<input type="text" v-model="username"></p>
@@ -9,10 +9,9 @@
 
 <script>
 export default {
-  name: 'Login',
+  name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
       username:"",
       password:""
     }
@@ -29,8 +28,24 @@ export default {
         },
         responseType:'json'
       }).then(function (response) {
-        console.log(response)
-        // that.$route.push('/')
+        
+         that.$store.commit('saveToken',response.data)
+        
+         // 重定向到index
+        
+         console.log(response.data.code)
+        
+         if (response.data.code == 1001){
+         
+           that.$router.push('/login')
+         
+         }
+       
+         else{
+            
+             that.$router.push('/helloworld')
+        
+         }
       })
     }
   }
